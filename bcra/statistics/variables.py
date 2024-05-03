@@ -1,12 +1,11 @@
 from bcra.base import BaseClient
 from bcra.config import ConfigClient
-from bcra.statistics import PATH_ROOT
 
 
 class Variables(BaseClient):
 
-    def __init__(self, config: ConfigClient) -> None:
-        self.path = PATH_ROOT + "principalesvariables"
+    def __init__(self, config: ConfigClient, path_root) -> None:
+        self.path = path_root + "principalesvariables"
         super().__init__(config)
 
     def get(self,
