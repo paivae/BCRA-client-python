@@ -44,7 +44,6 @@ class BaseClient:
 
         try:
             obj = self._decoded(response)
+            return obj
         except Exception as e:
             print(f"Error json response: {e}")
-
-
