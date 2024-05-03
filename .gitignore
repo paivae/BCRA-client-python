@@ -1,0 +1,11 @@
+
+# Distribution / packaging
+.Python
+env/
+build/
+dist/
+var/
+*.egg-info/
+
+# Logs
+*.log
