@@ -17,4 +17,5 @@ class Variables(BaseClient):
         if id_variable is not None and from_ is not None and to is not None:
             self.path = f"{self.path}{self.path}/{id_variable}/{from_}/{to}"
 
-        return self._get(path=self.path)
+        response = self._get(path=self.path)
+        return response['results']
