@@ -1,14 +1,12 @@
-from statistics import Stadistics
-import os
+from .config import ConfigClient
+from .statistics import Statistics
 
 BASE = "https://api.bcra.gob.ar/"
-ENV_KEY = "BCRA_API_KEY"
 
-class Client (
-    Stadistics
-): 
-    def __init__(self,
-                 api_key: str = os.getenv(ENV_KEY)
-                 ) -> None:
-        super().__init__()
-        
+
+class Client:
+    def __init__(self, config: ConfigClient = None) -> None:
+        if config is None:
+            config = ConfigClient()
+
+        self.statistics = Statistics(config)

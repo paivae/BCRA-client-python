@@ -1,20 +1,21 @@
 from bcra.base import BaseClient
+from bcra.config import ConfigClient
 from bcra.statistics import PATH_ROOT
 
-class Variables(BaseClient):
-    
-    def __init__(self) -> None:
-        self.path = PATH_ROOT + "principalesvariables"
 
+class Variables(BaseClient):
+
+    def __init__(self, config: ConfigClient) -> None:
+        self.path = PATH_ROOT + "principalesvariables"
+        super().__init__(config)
 
     def get(self,
-            idVariable: int = None,
+            id_variable: int = None,
             from_: str = None,
             to: str = None):
-        
         path_params = ""
 
-        if(idVariable != None and from_ != None and to != None):
-            path_params = f"{self.path}/{idVariable}/{from_}/{to}"
+        if (id_variable != None and from_ != None and to != None):
+            path_params = f"{self.path}/{id_variable}/{from_}/{to}"
 
         return self._get(path=self.path, params=path_params)

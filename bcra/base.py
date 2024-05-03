@@ -1,3 +1,4 @@
+from .config import ConfigClient
 import pkg_resources
 import urllib3
 import json
@@ -11,13 +12,9 @@ except:
 
 class BaseClient:
 
-    def __init__(self,
-                 api_key: str,
-                 connect_timeout: float,
-                 base : str
-                 ) -> None:
+    def __init__(self, config: ConfigClient) -> None:
         
-        self.BASE = base
+        self.base_url = config.base_url
         
         self.headers = {
             "Accept-Encoding": "gzip",

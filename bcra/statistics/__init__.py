@@ -1,9 +1,9 @@
+from bcra.config import ConfigClient
 from .variables import Variables
 
 PATH_ROOT = "estadisticas/v1/"
 
-class Stadistics(
-    Variables
-):
-    def __init__(self) -> None:
-        super().__init__()
+
+class Statistics:
+    def __init__(self, config: ConfigClient) -> None:
+        self.variables = Variables(config)
