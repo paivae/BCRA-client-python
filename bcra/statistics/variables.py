@@ -14,7 +14,7 @@ class Variables(BaseClient):
             to: str = None):
         path_params = ""
 
-        if (id_variable != None and from_ != None and to != None):
-            path_params = f"{self.path}/{id_variable}/{from_}/{to}"
+        if id_variable is not None and from_ is not None and to != None:
+            self.path = f"{self.path}{self.path}/{id_variable}/{from_}/{to}"
 
-        return self._get(path=self.path, params=path_params)
+        return self._get(path=self.path)
