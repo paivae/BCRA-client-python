@@ -20,10 +20,6 @@ keywords = [
   "client"
 ]
 
-packages = [
-  { include = "bcra" }
-]
-
 [project.urls]
 Homepage = "https://github.com/paivae/BCRA-client-python"
 Issues = "https://github.com/paivae/BCRA-client-python/issues"

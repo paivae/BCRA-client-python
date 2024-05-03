@@ -43,7 +43,7 @@ class BaseClient:
         
 
         if response.status != 200 :
-            raise "Mverga"
+            raise "Error in Query"
         
         try:
             obj = self._decoded(response)
