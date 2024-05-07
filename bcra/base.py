@@ -12,14 +12,17 @@ except:
 
 
 class BaseClient:
-
+    """
+        Clase encargada de armar todo lo necesario para realizar las peticiones REST
+    """
     def __init__(self, config: ConfigClient) -> None:
 
         self.base_url = config.base_url
 
         self.headers = {
             "Accept-Encoding": "gzip",
-            "User-Agent": f"paivae/BCRA BCRA_Python_Client/{version}",
+            "User-Agent": f"paivae.com BCRA_Python_Client/{version}",
+            "Accept-Language": config.language
         }
 
         self.client = urllib3.PoolManager(
@@ -27,11 +30,21 @@ class BaseClient:
         )
 
     def _decoded(self, response):
+        """
+        Método para decodificar el JSON de la respuesta
+        :param response: response del request
+        :return: el cuerpo del response en codificación UTF8
+        """
         return json.loads(response.data.decode("utf-8"))
 
     def _get(self,
              path: str
              ):
+        """
+        Método encargado de realizar las consultas GET
+        :param path: url completa
+        :return: se retorna él response en caso de ser el status 200
+        """
 
         response = self.client.request(
             "GET",

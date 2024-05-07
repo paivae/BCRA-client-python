@@ -1,4 +1,7 @@
-# BCRA-client-python
+# BCRA Client Python
+
+![pypi version](https://img.shields.io/pypi/v/bcra-api-client?style=flat&label=pypi%20package&color=green)
+
 Consumo de datos de la API del Banco Central de la República Argentina (BCRA)
 
 Esta librería está construida con base en la documentación presentada por la misma entidad en el siguiente [link](https://www.bcra.gob.ar/BCRAyVos/catalogo-de-APIs-banco-central.asp).
@@ -19,34 +22,48 @@ Su uso es simple, se debe crear primero un cliente a la API.
 ```python
 from bcra import Client
 
-cliente = Client()
+client = Client()
 ```
 
-## Principales variables
-Método para obtener la lista de todas las variables publicadas por el BCRA.
+## Configurar el Cliente
+Se pueden cambiar las configuraciones de un cliente de la siguiente manera: 
 ```python
-variables_endpoint = cliente.statistics.variables
-print(variables_endpoint.get())
+from bcra import ConfigClient, Client
+
+config = ConfigClient(language='es')
+
+client = Client(config)
+```
+
+### Referencias
+
+- #### language: 
+Los idiomas configurados actualmente “es-AR” y “en-US”. De no informar dicho
+parámetro, la respuesta se realizará por defecto en “es-AR”.
+
+Los valores admitidos son “es” referenciando a “es-AR” o “en” a “en-US”.
+
+
+## Principales variables
+Para obtener la lista de todas las variables publicadas por el BCRA.
+```python
+statistics = client.statistics
+print(statistics.variables())
 ```
 
 ## Datos de Variable
-Método para obtener los valores para la variable y el rango de fechas indicadas.
+Para obtener los valores para la variable y el rango de fechas indicadas.
 
-se debe llamar a filter(id_variable, from_, to)
+Se debe llamar al mismo método con los siguientes parámetros (id_variable, from_, to)
 
 Donde: 
 
-- id_variable : Int (Se obtiene de consultar a la lista de todas las variables)
-- from_: String (yyyy-mm-dd)
-- to: String (yyyy-mm-dd)
-
-
-
-
-
+- **id_variable**: (Int) Se obtiene de consultar a la lista de todas las variables
+- **from_**: (String) Corresponde a la fecha de inicio del rango a consultar, la misma deberá tener el formato yyyy-mm-dd
+- **to**: (String) Corresponde a la fecha de fin del rango a consultar, la misma deberá tener el formato yyyy-mm-dd
 
 ```python
-variables_endpoint = cliente.statistics.variables
-print(variables_endpoint.filter(5, '2024-01-01', '2024-05-01'))
+statistics = client.statistics
+print(statistics.variables(5, '2024-01-01', '2024-05-01'))
 ```
 
